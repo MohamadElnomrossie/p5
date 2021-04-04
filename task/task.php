@@ -124,6 +124,7 @@ function drawTable($productsNo)
     $table .= "</tbody></table><button type='submit' name='productsCalculate' class='btn btn-dark form-control'>Calculate</button>";
     return $table;
 }
+
 ?>
 
 <!doctype html>
