@@ -1,5 +1,6 @@
 <?php
-ob_start(); 
+ob_start();
+session_start();
 ?>
 
 <!doctype html>
@@ -144,18 +145,36 @@ ob_start();
                                     </ul>
                                 </nav>
                             </div>
-                            <div class="header-currency">
-                                <span class="digit">USD <i class="ti-angle-down"></i></span>
-                                <div class="dollar-submenu">
-                                    <ul>
-                                        <li><a href="#">$ USD</a></li>
-                                        <li><a href="#">€ EUR</a></li>
-                                        <li><a href="#">£ GBP</a></li>
-                                        <li><a href="#">₹ INR</a></li>
-                                        <li><a href="#">¥ JPY</a></li>
-                                    </ul>
+                            <?php 
+                            if(isset($_SESSION['user'])){
+                                ?>
+                                <div class="header-currency">
+                                    <span class="digit"><?php echo $_SESSION['user']->Name; ?> <i class="ti-angle-down"></i></span>
+                                    <div class="dollar-submenu">
+                                        <ul>
+                                            <li><a href="my-account.php">Profile</a></li>
+                                            <li><a href="logout.php">Logout</a></li>
+                                            
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php
+                            }else{
+                                ?>
+                                    <div class="header-currency">
+                                        <span class="digit">Welcome <i class="ti-angle-down"></i></span>
+                                        <div class="dollar-submenu">
+                                            <ul>
+                                                <li><a href="login.php">Login</a></li>
+                                                <li><a href="register.php">Register</a></li>
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                <?php
+                            }
+                            ?>
+                            
                             <div class="header-cart">
                                 <a href="#">
                                     <div class="cart-icon">

@@ -2,7 +2,7 @@
 include_once "layouts/header.php";
 include_once "validations/userValidation.php";
 include_once "app/User.php";
-
+include_once "includes/mustGuest.php";
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
@@ -77,7 +77,7 @@ if (isset($_POST['submit'])) {
                         $mail->Body    = $msg;
 
                         $mail->send();
-                        header("Location:check-code.php");
+                        header("Location:check-code.php?email=".$_POST['E_mail'].'&forget=0');
 
                         // echo 'Message has been sent';
                     } catch (Exception $e) {

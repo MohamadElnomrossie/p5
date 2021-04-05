@@ -75,5 +75,46 @@ class userValidation {
         return $errors;
     }
 
+    public function passwordLoginValidation()
+    {
+        $pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
+        $errors = [];
+        if(!$this->password){
+            $errors['required'] = "<div class='alert alert-danger'> Password Is Required </div>";
+        }else{
+            if(!preg_match($pattern,$this->password)){
+                $errors['pattern'] = "<div class='alert alert-danger'> Wrong Email Or Password </div>";
+            }
+        }
+        return $errors;
+    }
+
+    public function emailURLValidation($data)
+    {
+        if ($data) {
+            // if get has key = email
+            if (isset($data['email'])) {
+                // if email has value
+                if ($data['email']) {
+                    $emailChecked = new user;
+                    $emailChecked->setEmail($data['email']);
+                    $verifyEmail = $emailChecked->emailCheck();
+                    if($verifyEmail){
+                        $user = $verifyEmail->fetch_object();
+                        return $user;
+                    }else{
+                        header('Location:404.php');
+                    }
+                }else{
+                    header('Location:404.php');
+                }
+            }else{
+                header('Location:404.php');
+            }
+        }else{
+            header('Location:404.php');
+        }
+    }
+
 }
 ?>
